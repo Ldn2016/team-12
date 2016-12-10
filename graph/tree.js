@@ -119,3 +119,19 @@ var c = collapseTreeIntoJson(b);
 console.log("");
 console.log(c);
 
+function addDependency(topic1, topic2, json) {
+    if (topic1 in json) {
+        var entry = json[topic1];
+        entry['lead_to'].push(topic2);
+    } else {
+        json[topic1] = {lead_to : [topic2], depend_on : []};
+    }
+    if (topic2 in json) {
+        var entry = json[topic2];
+        entry['depend_on'].push[topic1];
+    } else {
+        json[topic2] = {lead_to : [], depend_on : [topic1]};
+    }
+}
+
+
