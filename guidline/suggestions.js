@@ -85,16 +85,15 @@ function formList(j, exeReq, taskList) {
                 var length = listJson.length;
                 for (var i = 0; i < length; i++) {
                     //TODO: implement with database
-                    var path = listJson[i].path.split('/');
-                    var endp = path[path.length -2];
+                    var path = listJson[i].path;
                     list.push({
                         "title": listJson[i].title,
                         "completed": false,
                         "progress": 0,
                         "recommendation": 0,
-                        "url": 'http://198.199.112.173:8008/api/topic_tree/khan?parent=' + endp,
                         "score": Math.floor((Math.random() * 10) + 1),
-                });
+                        "url": 'http://198.199.112.173:8008/learn/'+ path
+                    });
                 }
             }
             var returns = {"name": taskList[j].title, "tasks": list, "recommendation": 0};
