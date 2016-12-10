@@ -1,5 +1,16 @@
 var userScoreMap = {};
 var fs = require("fs");
+var score = require('./scores.json');
+loadScore();
+function loadScore(){
+    var length =  score.length;
+    for(var i = 0;  i < length; i++){
+        var userid = score[i].userid;
+        var scoreEntry = score[i].score;
+        userScoreMap[userid] = scoreEntry;
+    }
+    return;
+}
 
 // getting the update of user score
 app.post('/leaderboardupdate/', function(request, result){
