@@ -29,11 +29,7 @@ app.get('/exercises', function (request, result) {
     var user = request.body.user;
     //TODO : request dynamic with user to baselevel
     var baseLevel = "http://198.199.112.173:8008/api/topic_tree/khan?parent=addition-subtraction";
-    var p1 = new Promise(function (resolve, reject){
-        setTimeout(resolve ,1000, "one");
-    });
-
-    var acc = [p1];
+    var acc = [];
     HTTPRequest(baseLevel, function (error, res, body) {
         if (!error && res.statusCode == 200) {
             var taskList = JSON.parse(body);
@@ -78,8 +74,8 @@ function formList(j, exeReq, taskList) {
                 });
                 }
             }
-            var fuck = {"name": taskList[j].title, "tasks": list, "recommendation": 0};
-            resolve(fuck);
+            var returns = {"name": taskList[j].title, "tasks": list, "recommendation": 0};
+            resolve(returns);
         }), function (err, res) {
             if (err) rej(res);
             else
