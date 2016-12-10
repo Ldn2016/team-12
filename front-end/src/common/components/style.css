@@ -10,7 +10,13 @@
 }
 
 body {
-  background-color: #F1F1F1 !important;
+  ackground: #50a3a2 !important;
+background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%) !important;
+background: -moz-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%) !important;
+background: -o-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%) !important;
+background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%) !important;
+	width: 100vw !important;
+	height: 100vh !important;
 }
 
 .score {

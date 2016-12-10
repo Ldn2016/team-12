@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import styles from './style.css';
-
+var request = require('request');
 import Lockr from 'Lockr';
 
 export default class LoginPage extends React.Component {
@@ -29,7 +29,17 @@ export default class LoginPage extends React.Component {
   handleClick(e) {
     e.preventDefault();
     Lockr.set('username', this.state.username);
-    browserHistory.push('/home');
+
+    request('http://www.google.com', function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log(body) // Show the HTML for the Google homepage.
+      }
+
+      // browserHistory.push('/home');
+    });
+
+
+
   }
 
   render() {

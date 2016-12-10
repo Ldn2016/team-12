@@ -13,11 +13,11 @@ export default class Leaderboard extends React.Component {
       users: [
           {
             username: "John",
-            score: 12
+            score: 22
           },
           {
             username: "Mary",
-            score: 22
+            score: 12
           },
           {
             username: "Zane",

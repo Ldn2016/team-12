@@ -6,6 +6,11 @@
     display: inline-block;
   }
 
+  h1 {
+    font-weight: 200;
+    margin-bottom: 20px;
+  }
+
   h5 {
     display: inline-block;
   }

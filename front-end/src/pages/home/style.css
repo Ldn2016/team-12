@@ -2,7 +2,11 @@
   margin-top: 20px;
 
   h1 {
-    margin-left: 20px;
+    margin: 0 20px;
+    font-weight: 200;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
 }
 
@@ -14,6 +18,7 @@ div.horizontalScroll {
 div.horizontalScroll section {
     background-color: white;
     margin: 20px;
+    margin-top: 10px;
     width: 300px;
     display: inline-block;
     color: white;
@@ -23,7 +28,7 @@ div.horizontalScroll section {
     border-radius: 3px;
 
     h3 {
-      font-weight: bold;
+      font-weight: 400 !important;
       color: #333;
       opacity: 0.8;
     }
@@ -34,6 +39,7 @@ div.horizontalScroll section {
         opacity: 0.8;
         display: inline-block;
         width: 50%;
+        font-size: 20px;
       }
     }
 }
