@@ -34,16 +34,30 @@ export default class LoginPage extends React.Component {
 
   render() {
     return (
-      <div className={styles.content}>
+      <div className={styles.wrapper}>
         <div className={styles.form}>
           <h1 className={styles.heading}>Login</h1>
           <form action="" className={styles.loginForm}>
             <input type="text" onChange={this.handleUsername} placeholder="username"/>
             <input className={styles.password} type="password" placeholder="password" />
             <button onClick={this.handleClick}>login</button>
-            <p className="message">Admin or coach? <a href="#">Log in here</a></p>
+            <p className="message">Admin or coach - <a href="#">Log in here</a></p>
           </form>
-      </div>
+        </div>
+        <div className={styles.container}>
+        </div>
+        <ul className={styles.bgBubbles}>
+      		<li></li>
+      		<li></li>
+      		<li></li>
+      		<li></li>
+      		<li></li>
+      		<li></li>
+      		<li></li>
+      		<li></li>
+      		<li></li>
+      		<li></li>
+      	</ul>
       </div>
     );
   }

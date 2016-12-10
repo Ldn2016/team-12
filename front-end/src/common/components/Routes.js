@@ -16,6 +16,6 @@ export default (
     <Route path="leaderboard" component={Leaderboard} />
     <Route path="login" component={LoginPage} />
     <Route path="logout" component={LogoutPage} />
-    <Route path="lesson/lessonId" component={LessonPage}/>
+    <Route path="lesson/:lessonId" component={LessonPage}/>
   </Route>
 );

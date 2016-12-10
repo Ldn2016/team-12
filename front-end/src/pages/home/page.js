@@ -2,8 +2,7 @@ import React from "react";
 import styles from "./style.css";
 
 import ReactList from 'react-list';
-
-import { browserHistory } from 'react-router';
+import { Router, Route, Link, browserHistory } from 'react-router';
 import Lockr from 'Lockr';
 
 export default class HomePage extends React.Component {
@@ -130,7 +129,7 @@ export default class HomePage extends React.Component {
     });
     var lessonsDiv = this.state.lessons.map(lesson => {
       return (
-        <a key={lesson.name} href={"lesson/" + lesson.name.toLowerCase()}>
+        <Link to={"lesson/" + lesson.name.toLowerCase()} key={lesson.name}>
           <section>
             <img src="http://placehold.it/150x150" />
             <h3>{lesson.name}</h3>
@@ -138,7 +137,7 @@ export default class HomePage extends React.Component {
               <p>Completed: 2/{lesson.exercises.length}</p>
             </div>
           </section>
-        </a>
+        </Link>
       )
     });
     return (

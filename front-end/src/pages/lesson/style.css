@@ -4,17 +4,25 @@
   h1 {
     margin-left: 20px;
   }
+
+  .back {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
 }
 
-div.horizontalScroll {
-    overflow: auto;
-    white-space: nowrap;
+div.verticalScroll {
+  display: flex;
+  background: white;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  margin: 10px 20px;
+  justify-content: space-between;
 }
 
-div.horizontalScroll section {
-    background-color: white;
+div.verticalScroll section {
     margin: 20px;
-    width: 300px;
+    width: 30%;
     display: inline-block;
     color: white;
     text-align: center;

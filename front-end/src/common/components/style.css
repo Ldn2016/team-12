@@ -1,6 +1,7 @@
 .header {
   height: 80px;
-  background-color: #F9AE87;
+  background-color: white;
+  border-bottom: 1px solid #eee;
 }
 
 .button {
@@ -15,6 +16,7 @@ body {
 .score {
   text-align: center;
   margin-top: -55px;
+  color: #333;
 
   h2 {
     font-size: 20px;

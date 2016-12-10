@@ -3,12 +3,15 @@ import styles from "./style.css";
 
 import ReactList from 'react-list';
 
+import { Router, Route, Link } from 'react-router';
+import { Button } from 'react-bootstrap';
+
 export default class LessonPage extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      exerciseName: this.props.params.lessonId,
+      exerciseId: "",
       exercises: [
         {
           name: "Numbers to ",
@@ -35,7 +38,9 @@ export default class LessonPage extends React.Component {
   }
 
   componentWillMount() {
-
+    this.setState({
+      exerciseName: this.props.params.lessonId
+    });
   }
 
   renderItem(index, key) {
@@ -61,8 +66,9 @@ export default class LessonPage extends React.Component {
     });
     return (
       <div className={styles.content}>
-        <h1>Contine with progress:</h1>
-        <div className={styles.horizontalScroll}>
+        <div className={styles.back}><Link to={'/home'}><Button bsSize="large">Home</Button></Link></div>
+        <h1>{this.state.exerciseName}:</h1>
+        <div className={styles.verticalScroll}>
           {exerciseDiv}
         </div>
       </div>
