@@ -4,7 +4,7 @@ import styles from './style.css';
 
 import Lockr from 'Lockr';
 
-export default class LoginPage extends React.Component {
+export default class LogoutPage extends React.Component {
   componentWillMount() {
     Lockr.flush();
     browserHistory.push('/login');

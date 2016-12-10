@@ -11,3 +11,13 @@
 body {
   background-color: #F1F1F1 !important;
 }
+
+.score {
+  text-align: center;
+  margin-top: -55px;
+
+  h2 {
+    font-size: 20px;
+    font-weight: 300;
+  }
+}

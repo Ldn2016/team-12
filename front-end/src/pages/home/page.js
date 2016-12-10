@@ -3,6 +3,7 @@ import styles from "./style.css";
 
 import ReactList from 'react-list';
 
+import { browserHistory } from 'react-router';
 import Lockr from 'Lockr';
 
 export default class HomePage extends React.Component {
@@ -104,6 +105,12 @@ export default class HomePage extends React.Component {
     };
   }
 
+  componentWillMount() {
+    if (!Lockr.get('username')) {
+      browserHistory.push('/login');
+    }
+  }
+
   render() {
     var countCompleted = 0;
 
@@ -123,7 +130,7 @@ export default class HomePage extends React.Component {
     });
     var lessonsDiv = this.state.lessons.map(lesson => {
       return (
-        <a key={lesson.name} href={"/lesson/" + lesson.name.toLowerCase()}>
+        <a key={lesson.name} href={"lesson/" + lesson.name.toLowerCase()}>
           <section>
             <img src="http://placehold.it/150x150" />
             <h3>{lesson.name}</h3>

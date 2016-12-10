@@ -3,11 +3,12 @@ import styles from "./style.css";
 
 import ReactList from 'react-list';
 
-export default class HomePage extends React.Component {
+export default class LessonPage extends React.Component {
   constructor() {
     super();
 
     this.state = {
+      exerciseName: this.props.params.lessonId,
       exercises: [
         {
           name: "Numbers to ",
