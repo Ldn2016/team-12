@@ -1,0 +1,23 @@
+.content {
+  margin-top: 20px;
+  padding: 0 20px;
+
+  h4 {
+    display: inline-block;
+  }
+
+  h1 {
+    font-weight: 200;
+    margin-bottom: 20px;
+  }
+
+  h5 {
+    display: inline-block;
+  }
+
+  .back {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+  }
+}

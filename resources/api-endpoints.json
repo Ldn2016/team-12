@@ -1,0 +1,23 @@
+
+GET: https://localhost/exercises/?user=USERID/
+
+exercises: [
+	{
+		name: string,
+		tasks: [{
+				title: string,
+				completed: bool,
+				progress: int (0-100),
+				recommendation: int,
+				url: string
+			}, ... ],
+		recommendation:  int
+	}, ...
+]
+
+GET: https://localhost/leaderboard/
+
+users: [{
+	name: string,
+	ranking:
+}]
