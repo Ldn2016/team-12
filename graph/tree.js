@@ -16,18 +16,19 @@ function insert(json, node, path, n, last) {
             if (child.value != null) {
                 console.error("duplicate entry key = " + key + " path = " + path);
             }
-            child.value = {type: json.type, exercise_id : json.exercise_id, title : json.title, path : json.path};
+            child.value = {type: json.type, exercise_id : json.exercise_id, index : json.index, title : json.title, path : json.path};
             return node;
         }
         var child = new Node();
         child.parent = node;
-        child.value = {type: json.type, exercise_id : json.exercise_id, title : json.title, path : json.path};
+        child.value = {type: json.type, exercise_id : json.exercise_id, index : json.index, title : json.title, path : json.path};
         node.children[key] = child;
         return node;
     } else if (n < last) {
         var key = path[n];
         if (key in node.children) {
             var child = node.children[key];
+            child.parent = node;
             node.children[key] = insert(json, child, path, n + 1, last);
             return node;
         }
@@ -42,9 +43,9 @@ function insert(json, node, path, n, last) {
 }
 
 var a = [
-    {type : 'video', exercise_id : 13354, title : 'bfdb', path : 'a/b/c'},
-    {type : 'topic', exercise_id : 1335, title : 'bfdfbdfbdb', path : 'a/b'},
-    {type : 'excercise', exercise_id : 133532423, title : 'bgbgfdb', path : 'a/b/d'},
+    {type : 'video', exercise_id : 13354, index: 2, title : 'bfdb', path : 'a/b/c/d'},
+    {type : 'topic', exercise_id : 1335, index: 3, title : 'bfdfbdfbdb', path : 'a/b'},
+    {type : 'excercise', exercise_id : 133532423, index : 4, title : 'bgbgfdb', path : 'a/b/c/e'},
 ]
 
 var b = new Node();
@@ -60,9 +61,51 @@ function ShowTree(node) {
 
 for (var i = 0; i < a.length; i++) {
     var path = a[i].path.split('/');
-    console.log(path);
     var last = path.length - 1;
     b = insert(a[i], b, path, 0, last);
-    ShowTree(b);
-    console.log("");
 }
+
+ShowTree(b);
+
+function isLeafNode(node) {
+    return node.children.length == 0;
+}
+
+function findTopicNode(node) {
+    var current = node;
+    while(current.type !== 'topic') {
+        current = current.parent;
+    }
+    return current;
+}
+
+function collapseTreeIntoJson(node) {
+    var leafNodes = [];
+    var list = [node];
+    while(list.length != 0) {
+        var current = list.pop();
+        if (isLeafNode(current)) {
+            leafNodes.push(current);
+        } else {
+            var children = node.children;
+            for (var key in children) {
+                list.push(children[key]);
+            }
+        }
+    }
+    var result = {}
+    for (var node in leafNodes) {
+        var topic = findTopicNode(node).type;
+        if (topic in result) {
+            result[topic].push(node.value);
+        } else {
+            result[topic] = [node.value];
+        }
+    }
+    return result;
+}
+
+//var c = collapseTreeIntoJson(b);
+
+//console.log(c);
+
