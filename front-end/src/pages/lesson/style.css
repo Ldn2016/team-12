@@ -1,0 +1,39 @@
+.content {
+  margin-top: 20px;
+
+  h1 {
+    margin-left: 20px;
+  }
+}
+
+div.horizontalScroll {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+div.horizontalScroll section {
+    background-color: white;
+    margin: 20px;
+    width: 300px;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+    border-radius: 3px;
+
+    h3 {
+      font-weight: bold;
+      color: #333;
+      opacity: 0.8;
+    }
+
+    .textWrap {
+      p {
+        color: #333;
+        opacity: 0.8;
+        display: inline-block;
+        width: 50%;
+      }
+    }
+}

@@ -10,7 +10,7 @@ export default class HomePage extends React.Component {
     this.state = {
       exercises: [
         {
-          name: "Biology",
+          name: "Numbers to ",
           progress: 50,
           points: 32,
           url: "http://google.com/"
@@ -27,6 +27,77 @@ export default class HomePage extends React.Component {
           points: 44,
           url: "http://google.com/"
         }
+    ],
+    lessons: [
+      {
+        name: "Biology",
+        exercises: [
+          {
+            name: "Numbers to 120",
+            completed: true,
+            url: "http://google.com/"
+          },
+          {
+            name: "Make 10",
+            completed: false,
+            url: "http://google.com/"
+          },
+          {
+            name: "Groups of ten",
+            progress: 80,
+            completed: true,
+            url: "http://google.com/"
+          },
+          {
+            name: "Groups of ten",
+            progress: 80,
+            completed: true,
+            url: "http://google.com/"
+          }
+        ]
+      },
+      {
+        name: "Chemistry",
+        exercises: [
+          {
+            name: "Numbers to 120",
+            completed: true,
+            url: "http://google.com/"
+          },
+          {
+            name: "Make 10",
+            completed: false,
+            url: "http://google.com/"
+          },
+          {
+            name: "Groups of ten",
+            progress: 80,
+            completed: true,
+            url: "http://google.com/"
+          }
+        ]
+      },
+      {
+        name: "Physics",
+        exercises: [
+          {
+            name: "Numbers to 120",
+            completed: true,
+            url: "http://google.com/"
+          },
+          {
+            name: "Make 10",
+            completed: false,
+            url: "http://google.com/"
+          },
+          {
+            name: "Groups of ten",
+            progress: 80,
+            completed: true,
+            url: "http://google.com/"
+          }
+        ]
+      }
     ]
     };
 
@@ -34,7 +105,7 @@ export default class HomePage extends React.Component {
   }
 
   componentWillMount() {
-
+    document.cookie = { name: "myname" }
   }
 
   renderItem(index, key) {
@@ -42,12 +113,14 @@ export default class HomePage extends React.Component {
   }
 
   render() {
+    var countCompleted = 0;
+
     var exerciseDiv = this.state.exercises.map(exercise => {
       return (
-        <a href={exercise.url}>
-          <section key={exercise.name}>
+        <a key={exercise.name} href={exercise.url}>
+          <section>
             <img src="http://placehold.it/150x150" />
-            <h3>Maths</h3>
+            <h3>{exercise.name}</h3>
             <div className={styles.textWrap}>
               <p>{exercise.progress}% completed</p>
               <p>{exercise.points} points</p>
@@ -55,10 +128,27 @@ export default class HomePage extends React.Component {
           </section>
         </a>
       )
-    })
+    });
+    var lessonsDiv = this.state.lessons.map(lesson => {
+      return (
+        <a key={lesson.name} href={"/lesson/" + lesson.name.toLowerCase()}>
+          <section>
+            <img src="http://placehold.it/150x150" />
+            <h3>{lesson.name}</h3>
+            <div className={styles.textWrap}>
+              <p>Completed: 2/{lesson.exercises.length}</p>
+            </div>
+          </section>
+        </a>
+      )
+    });
     return (
       <div className={styles.content}>
-        <h1>Recommendations</h1>
+        <h1>Lessons:</h1>
+        <div className={styles.horizontalScroll}>
+          {lessonsDiv}
+        </div>
+        <h1>Contine with progress:</h1>
         <div className={styles.horizontalScroll}>
           {exerciseDiv}
         </div>
