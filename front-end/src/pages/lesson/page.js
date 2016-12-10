@@ -14,7 +14,7 @@ export default class LessonPage extends React.Component {
       exerciseId: "",
       exercises: [
         {
-          name: "Numbers to ",
+          name: "Numbers to 100",
           progress: 50,
           points: 32,
           url: "http://google.com/"
@@ -30,12 +30,19 @@ export default class LessonPage extends React.Component {
           progress: 80,
           points: 44,
           url: "http://google.com/"
+        },
+        {
+          name: "Biology",
+          progress: 80,
+          points: 44,
+          url: "http://google.com/"
         }
     ]
   };
 
     this.renderItem = this.renderItem.bind(this);
   }
+
 
   componentWillMount() {
     this.setState({
@@ -52,13 +59,12 @@ export default class LessonPage extends React.Component {
 
     var exerciseDiv = this.state.exercises.map(exercise => {
       return (
-        <a  key={exercise.name} href={exercise.url}>
-          <section>
+        <a key={exercise.name} href={exercise.url}>
+          <section style={{backgroundColor: "rgb(" + (255 - (255 * Math.round((exercise.progress / 100)))) + "," + (255 * Math.round((exercise.progress / 100))) + ", 0)"}}>
             <img src="http://placehold.it/150x150" />
             <h3>{exercise.name}</h3>
             <div className={styles.textWrap}>
               <p>{exercise.progress}% completed</p>
-              <p>{exercise.points} points</p>
             </div>
           </section>
         </a>

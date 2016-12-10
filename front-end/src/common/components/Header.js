@@ -4,7 +4,7 @@ import s from "./style.css";
 import { Router, Route, Link } from 'react-router'
 
 import { Button } from 'react-bootstrap';
-
+5
 import { browserHistory } from 'react-router';
 import Lockr from 'Lockr';
 
@@ -13,7 +13,7 @@ export default class Header extends React.Component {
     var score = <div></div>
 
     if (Lockr.get('username')) {
-      score = <h2>{Lockr.get('username')}'s score is 34!</h2>
+      score = <h2>{Lockr.get('username')}'s score is {Lockr.get('score')}!</h2>
     }
 
     return (

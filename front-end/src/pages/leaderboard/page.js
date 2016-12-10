@@ -5,6 +5,9 @@ import { Router, Route, Link } from 'react-router'
 
 import {ListGroup, ListGroupItem, Button} from 'react-bootstrap';
 
+import Lockr from 'Lockr';
+var request = require('superagent');
+
 export default class Leaderboard extends React.Component {
   constructor() {
     super();
@@ -27,6 +30,16 @@ export default class Leaderboard extends React.Component {
     }
   }
 
+  componentWillMount() {
+    request
+      .post('https://sturdy-abstract.herokuapp.com/leaderboardrequest')
+      .send({ requestType: 'leaderboard' })
+      .set('Access-Control-Allow-Origin', '*')
+      .set('Access-Control-Allow-Credentials', 'true')
+      .end((err, res) => {
+          console.log(res);
+      });
+  }
 
   render() {
     var statsDiv = this.state.users.map(user => {

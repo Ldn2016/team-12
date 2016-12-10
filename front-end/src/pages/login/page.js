@@ -1,8 +1,12 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import styles from './style.css';
-var request = require('request');
+var rp = require('request-promise');
 import Lockr from 'Lockr';
+
+var jquery = require('jquery');
+
+var request = require('superagent');
 
 export default class LoginPage extends React.Component {
   constructor() {
@@ -28,18 +32,27 @@ export default class LoginPage extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
-    Lockr.set('username', this.state.username);
+    request
+      .post('https://sturdy-abstract.herokuapp.com/leaderboardrequest')
+      .send({ requestType: 'score', userid: this.state.username })
+      .set('Access-Control-Allow-Origin', '*')
+      .set('Access-Control-Allow-Credentials', 'true')
+      .end((err, res) => {
+        if (err) {
+          console.log(err);
+        }
+        //
+        // Lockr.set('username', this.state.username);
+        // Lockr.set('score', res.body.score);
+        // browserHistory.push('/home');
 
-    request('http://www.google.com', function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        console.log(body) // Show the HTML for the Google homepage.
-      }
+        request
+          .get('http://sturdy-so.herokuapp.com/exercises')
 
-      // browserHistory.push('/home');
-    });
-
-
-
+          .end((err2, res2) => {
+            console.log(res2);
+          });
+      });
   }
 
   render() {

@@ -5,6 +5,8 @@ import ReactList from 'react-list';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import Lockr from 'Lockr';
 
+var request = require('superagent');
+
 export default class HomePage extends React.Component {
   constructor() {
     super();
@@ -12,94 +14,41 @@ export default class HomePage extends React.Component {
     this.state = {
       exercises: [
         {
-          name: "Numbers to ",
-          progress: 50,
-          points: 32,
-          url: "http://google.com/"
+          name: "Maths",
+          tasks: [{
+            "title": "title 1",
+             "completed": false,
+             "progress": 0,
+             "recommendation": 0,
+             "url": 'http://198.199.112.173:8008/api/topic_tree/khan?parent=',
+             "score": Math.floor((Math.random() * 10) + 1),
+          }],
+          recommendation: 32
         },
         {
-          name: "Chemistry",
-          progress: 30,
-          points: 12,
-          url: "http://google.com/"
+          name: "Geog",
+          tasks: [{
+            "title": "title 2",
+             "completed": false,
+             "progress": 0,
+             "recommendation": 0,
+             "url": 'http://198.199.112.173:8008/api/topic_tree/khan?parent=',
+             "score": Math.floor((Math.random() * 10) + 1),
+          }],
+          recommendation: 32
         },
         {
-          name: "Physics",
-          progress: 80,
-          points: 44,
-          url: "http://google.com/"
+          name: "Bio",
+          tasks: [{
+            "title": "title 3",
+             "completed": false,
+             "progress": 0,
+             "recommendation": 0,
+             "url": 'http://198.199.112.173:8008/api/topic_tree/khan?parent=',
+             "score": Math.floor((Math.random() * 10) + 1),
+          }],
+          recommendation: 32
         }
-    ],
-    lessons: [
-      {
-        name: "Biology",
-        exercises: [
-          {
-            name: "Numbers to 120",
-            completed: true,
-            url: "http://google.com/"
-          },
-          {
-            name: "Make 10",
-            completed: false,
-            url: "http://google.com/"
-          },
-          {
-            name: "Groups of ten",
-            progress: 80,
-            completed: true,
-            url: "http://google.com/"
-          },
-          {
-            name: "Groups of ten",
-            progress: 80,
-            completed: true,
-            url: "http://google.com/"
-          }
-        ]
-      },
-      {
-        name: "Chemistry",
-        exercises: [
-          {
-            name: "Numbers to 120",
-            completed: true,
-            url: "http://google.com/"
-          },
-          {
-            name: "Make 10",
-            completed: false,
-            url: "http://google.com/"
-          },
-          {
-            name: "Groups of ten",
-            progress: 80,
-            completed: true,
-            url: "http://google.com/"
-          }
-        ]
-      },
-      {
-        name: "Physics",
-        exercises: [
-          {
-            name: "Numbers to 120",
-            completed: true,
-            url: "http://google.com/"
-          },
-          {
-            name: "Make 10",
-            completed: false,
-            url: "http://google.com/"
-          },
-          {
-            name: "Groups of ten",
-            progress: 80,
-            completed: true,
-            url: "http://google.com/"
-          }
-        ]
-      }
     ]
     };
   }
@@ -114,27 +63,29 @@ export default class HomePage extends React.Component {
     var countCompleted = 0;
 
     var exerciseDiv = this.state.exercises.map(exercise => {
+      return exercise.tasks.map(lesson => {
+        return (
+          <a key={lesson.title} href={lesson.url}>
+            <section>
+              <img src="http://placehold.it/150x150" />
+              <h3>{lesson.title}</h3>
+              <div className={styles.textWrap}>
+                <p>{lesson.progress}% completed</p>
+                <p>{lesson.score} points</p>
+              </div>
+            </section>
+          </a>
+        )
+      })
+    });
+    var lessonsDiv = this.state.exercises.map(exercise => {
       return (
-        <a key={exercise.name} href={exercise.url}>
+        <Link to={"lesson/" + exercise.name.toLowerCase()} key={exercise.name}>
           <section>
             <img src="http://placehold.it/150x150" />
             <h3>{exercise.name}</h3>
             <div className={styles.textWrap}>
-              <p>{exercise.progress}% completed</p>
-              <p>{exercise.points} points</p>
-            </div>
-          </section>
-        </a>
-      )
-    });
-    var lessonsDiv = this.state.lessons.map(lesson => {
-      return (
-        <Link to={"lesson/" + lesson.name.toLowerCase()} key={lesson.name}>
-          <section>
-            <img src="http://placehold.it/150x150" />
-            <h3>{lesson.name}</h3>
-            <div className={styles.textWrap}>
-              <p>Completed: 2/{lesson.exercises.length}</p>
+              <p>Lesson Score: {exercise.recommendation}</p>
             </div>
           </section>
         </Link>

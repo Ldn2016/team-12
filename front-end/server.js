@@ -1,6 +1,6 @@
 import express from 'express';
 const app = express();
-
+let cors = require('cors');
 
 /************************************************************
  *
@@ -10,6 +10,8 @@ const app = express();
  *   - index.html
  *
  ************************************************************/
+
+app.use(cors());
 
 // Serve application file depending on environment
 app.get('/app.js', (req, res) => {
