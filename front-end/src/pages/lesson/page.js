@@ -6,6 +6,8 @@ import ReactList from 'react-list';
 import { Router, Route, Link } from 'react-router';
 import { Button } from 'react-bootstrap';
 
+import Lockr from 'Lockr';
+
 export default class LessonPage extends React.Component {
   constructor() {
     super();
@@ -48,6 +50,22 @@ export default class LessonPage extends React.Component {
     this.setState({
       exerciseName: this.props.params.lessonId
     });
+
+    var exercises = JSON.parse(Lockr.get('exercises'));
+    var tasks = [];
+
+    console.log(exercises);
+
+    for (var index in exercises) {
+      var attr = exercises[index];
+      if (attr == "one") continue;
+
+      if (attr.name.toLowerCase() , " ", this.props.params.lessonId.toLowerCase()) {
+        tasks = attr.tasks;
+      }
+    }
+
+    this.setState({"exercises" : tasks});
   }
 
   renderItem(index, key) {
@@ -58,11 +76,12 @@ export default class LessonPage extends React.Component {
     var countCompleted = 0;
 
     var exerciseDiv = this.state.exercises.map(exercise => {
+      console.log(exercise);
       return (
-        <a key={exercise.name} href={exercise.url}>
+        <a key={exercise.title} href={exercise.url}>
           <section style={{backgroundColor: "rgb(" + (255 - (255 * Math.round((exercise.progress / 100)))) + "," + (255 * Math.round((exercise.progress / 100))) + ", 0)"}}>
             <img src="http://placehold.it/150x150" />
-            <h3>{exercise.name}</h3>
+            <h3>{exercise.title}</h3>
             <div className={styles.textWrap}>
               <p>{exercise.progress}% completed</p>
             </div>

@@ -31,6 +31,16 @@ app.get('/style.css', (req, res) => {
   }
 });
 
+// for demo
+
+app.get('/font/flaticon.css', (req, res) => {
+  if (process.env.PRODUCTION) {
+    res.sendFile(__dirname + '/build/font/flaticon.css');
+  } else {
+    res.redirect('//localhost:9090/build/font/flaticon.css');
+  }
+});
+
 // Serve index page
 app.get('*', (req, res) => {
   res.sendFile(__dirname + '/build/index.html');

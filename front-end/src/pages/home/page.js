@@ -57,28 +57,40 @@ export default class HomePage extends React.Component {
     if (!Lockr.get('username')) {
       browserHistory.push('/login');
     }
+    console.log(JSON.parse(Lockr.get('exercises')));
+
+    this.setState({"exercises" : JSON.parse(Lockr.get('exercises'))});
   }
 
   render() {
     var countCompleted = 0;
+    var lessonCount = 0;
 
     var exerciseDiv = this.state.exercises.map(exercise => {
+      if (exercise == "one") return;
+
       return exercise.tasks.map(lesson => {
-        return (
-          <a key={lesson.title} href={lesson.url}>
-            <section>
-              <img src="http://placehold.it/150x150" />
-              <h3>{lesson.title}</h3>
-              <div className={styles.textWrap}>
-                <p>{lesson.progress}% completed</p>
-                <p>{lesson.score} points</p>
-              </div>
-            </section>
-          </a>
-        )
+        if (lessonCount < 5) {
+          lessonCount++;
+          return (
+            <a key={lesson.title} href={lesson.url}>
+              <section>
+                <img src="http://placehold.it/150x150" />
+                <h3>{lesson.title}</h3>
+                <div className={styles.textWrap}>
+                  <p>{lesson.score} points</p>
+                </div>
+              </section>
+            </a>
+          );
+
+        }
+
+
       })
     });
     var lessonsDiv = this.state.exercises.map(exercise => {
+      if (exercise == "one") return;
       return (
         <Link to={"lesson/" + exercise.name.toLowerCase()} key={exercise.name}>
           <section>

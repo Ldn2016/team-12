@@ -41,16 +41,19 @@ export default class LoginPage extends React.Component {
         if (err) {
           console.log(err);
         }
-        //
-        // Lockr.set('username', this.state.username);
-        // Lockr.set('score', res.body.score);
-        // browserHistory.push('/home');
+
+        Lockr.set('username', this.state.username);
+        Lockr.set('score', res.body.score);
 
         request
           .get('http://sturdy-so.herokuapp.com/exercises')
-
           .end((err2, res2) => {
-            console.log(res2);
+            if (err2) {
+              console.log(err2);
+            }
+
+            Lockr.set('exercises', res2.text);
+            browserHistory.push('/home');
           });
       });
   }

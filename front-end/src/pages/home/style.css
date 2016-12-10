@@ -15,11 +15,15 @@ div.horizontalScroll {
     white-space: nowrap;
 }
 
+.icon {
+  font-size: 60px;
+  color: #333;
+}
+
 div.horizontalScroll section {
     background-color: white;
     margin: 20px;
     margin-top: 10px;
-    width: 300px;
     display: inline-block;
     color: white;
     text-align: center;
