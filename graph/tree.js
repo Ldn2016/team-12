@@ -50,12 +50,16 @@ var a = [
 
 var b = new Node();
 
-function ShowTree(node) {
+function ShowTree(node, n) {
+    for (var key in node.children) {
+        console.log( "{" + n + " : " + key + "}");
+    }
     if (node.value != null) {
+        console.log(n + " : ");
         console.log(node.value);
     }
     for (var key in node.children) {
-        ShowTree(node.children[key]);
+        ShowTree(node.children[key], n + 1);
     }
 }
 
@@ -65,18 +69,23 @@ for (var i = 0; i < a.length; i++) {
     b = insert(a[i], b, path, 0, last);
 }
 
-ShowTree(b);
-
-function isLeafNode(node) {
-    return node.children.length == 0;
-}
+//ShowTree(b, 0);
+console.log("");
 
 function findTopicNode(node) {
     var current = node;
-    while(current.type !== 'topic') {
+    while(current.value == null || current.value.type !== 'topic') {
         current = current.parent;
     }
     return current;
+}
+
+function isEmpty(obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+    return JSON.stringify(obj) === JSON.stringify({});
 }
 
 function collapseTreeIntoJson(node) {
@@ -84,28 +93,29 @@ function collapseTreeIntoJson(node) {
     var list = [node];
     while(list.length != 0) {
         var current = list.pop();
-        if (isLeafNode(current)) {
+        if (isEmpty(current.children)) {
             leafNodes.push(current);
         } else {
-            var children = node.children;
+            var children = current.children;
             for (var key in children) {
                 list.push(children[key]);
             }
         }
     }
-    var result = {}
-    for (var node in leafNodes) {
-        var topic = findTopicNode(node).type;
+    var result = {};
+    for (var i = 0; i < leafNodes.length; i++) {
+        var lfNode = leafNodes[i];
+        var topic = findTopicNode(lfNode).value.title;
         if (topic in result) {
-            result[topic].push(node.value);
+            result[topic].push(lfNode.value);
         } else {
-            result[topic] = [node.value];
+            result[topic] = [lfNode.value];
         }
     }
     return result;
 }
 
-//var c = collapseTreeIntoJson(b);
-
-//console.log(c);
+var c = collapseTreeIntoJson(b);
+console.log("");
+console.log(c);
 
