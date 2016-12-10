@@ -25,6 +25,29 @@ app.use(bodyParser.urlencoded({
 
 app.use(bodyParser.json());
 
+var RecentlyUSed = {};
+
+app.post('/lastUsed/', function(request, result){
+    console.log('POST LastUsed requested');
+    var user = request.body.userid;
+    var url = RecentlyUSed[user];
+    result.send(JSON.stringify({
+        "url" : url
+    }));
+});
+
+app.post('/addLastUsed', function(request, result){
+    console.log('Post AddLastUsed received');
+    var user = request.body.userid;
+    var url = request.body.url;
+    userScoreMap[user] = url;
+    result.send(JSON.stringify({
+        success : true
+    }))
+});
+
+
+
 app.get('/exercises', function (request, result) {
     var user = request.body.user;
     //TODO : request dynamic with user to baselevel
