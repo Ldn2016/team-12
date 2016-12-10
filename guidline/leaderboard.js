@@ -1,4 +1,5 @@
 var userScoreMap = {};
+var fs = require("fs");
 
 // getting the update of user score
 app.post('/leaderboardupdate/', function(request, result){
@@ -11,6 +12,10 @@ app.post('/leaderboardupdate/', function(request, result){
     } else {
         userScoreMap[user] += addscore;
     }
+
+    fs.writeFile("./scores.json", userScoreMap, function(){
+
+    });
 
     result.send(JSON.stringify({
         success : true
