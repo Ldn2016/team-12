@@ -3,6 +3,8 @@ import styles from "./style.css";
 
 import ReactList from 'react-list';
 
+import Lockr from 'Lockr';
+
 export default class HomePage extends React.Component {
   constructor() {
     super();
@@ -100,16 +102,6 @@ export default class HomePage extends React.Component {
       }
     ]
     };
-
-    this.renderItem = this.renderItem.bind(this);
-  }
-
-  componentWillMount() {
-    document.cookie = { name: "myname" }
-  }
-
-  renderItem(index, key) {
-    return <div key={key}>{this.state.exercises[index].name}</div>;
   }
 
   render() {
