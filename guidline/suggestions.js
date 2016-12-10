@@ -73,8 +73,9 @@ function formList(j, exeReq, taskList) {
                         "completed": false,
                         "progress": 0,
                         "recommendation": 0,
-                        "url": 'http://198.199.112.173:8008/api/topic_tree/khan?parent=' + endp
-                    });
+                        "url": 'http://198.199.112.173:8008/api/topic_tree/khan?parent=' + endp,
+                        "score": Math.floor((Math.random() * 10) + 1),
+                });
                 }
             }
             var fuck = {"name": taskList[j].title, "tasks": list, "recommendation": 0};
