@@ -1,0 +1,13 @@
+.header {
+  height: 80px;
+  background-color: #F9AE87;
+}
+
+.button {
+  padding-top: 15px;
+  padding-left: 15px;
+}
+
+body {
+  background-color: #F1F1F1 !important;
+}
