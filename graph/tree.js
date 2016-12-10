@@ -42,14 +42,6 @@ function insert(json, node, path, n, last) {
     }
 }
 
-var a = [
-    {type : 'video', exercise_id : 13354, index: 2, title : 'bfdb', path : 'a/b/c/d'},
-    {type : 'topic', exercise_id : 1335, index: 3, title : 'bfdfbdfbdb', path : 'a/b'},
-    {type : 'excercise', exercise_id : 133532423, index : 4, title : 'bgbgfdb', path : 'a/b/c/e'},
-]
-
-var b = new Node();
-
 function ShowTree(node, n) {
     for (var key in node.children) {
         console.log( "{" + n + " : " + key + "}");
@@ -62,15 +54,6 @@ function ShowTree(node, n) {
         ShowTree(node.children[key], n + 1);
     }
 }
-
-for (var i = 0; i < a.length; i++) {
-    var path = a[i].path.split('/');
-    var last = path.length - 1;
-    b = insert(a[i], b, path, 0, last);
-}
-
-//ShowTree(b, 0);
-console.log("");
 
 function findTopicNode(node) {
     var current = node;
@@ -115,10 +98,6 @@ function collapseTreeIntoJson(node) {
     return result;
 }
 
-var c = collapseTreeIntoJson(b);
-console.log("");
-console.log(c);
-
 function addDependency(topic1, topic2, json) {
     if (topic1 in json) {
         var entry = json[topic1];
@@ -134,10 +113,4 @@ function addDependency(topic1, topic2, json) {
     }
     return json;
 }
-
-var d = {'topic1' : {lead_to : [], depend_on : ['topic3']}, 'topic2' : {lead_to : ['topic3'], depend_on : []}};
-var e = {}
-console.log(e);
-e = addDependency('topic1', 'topic2', e);
-console.log(e);
 
