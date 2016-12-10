@@ -128,10 +128,16 @@ function addDependency(topic1, topic2, json) {
     }
     if (topic2 in json) {
         var entry = json[topic2];
-        entry['depend_on'].push[topic1];
+        entry['depend_on'].push(topic1);
     } else {
         json[topic2] = {lead_to : [], depend_on : [topic1]};
     }
+    return json;
 }
 
+var d = {'topic1' : {lead_to : [], depend_on : ['topic3']}, 'topic2' : {lead_to : ['topic3'], depend_on : []}};
+var e = {}
+console.log(e);
+e = addDependency('topic1', 'topic2', e);
+console.log(e);
 
